@@ -2,8 +2,8 @@
   <PropertyGroup>
     <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>CleanArchitecture.Infrastructure</AssemblyName>
-    <PackageId>CleanArchitecture.Infrastructure</PackageId>
+    <AssemblyName>ASPCoreApp.Infrastructure</AssemblyName>
+    <PackageId>ASPCoreApp.Infrastructure</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CleanArchitecture.Core\ASPCoreApp.Core.csproj" />
+    <ProjectReference Include="..\ASPCoreApp.Core\ASPCoreApp.Core.csproj" />
   </ItemGroup>
 </Project>

@@ -5,13 +5,11 @@ using System.Threading.Tasks;
 using ASPCoreApp.Core.Entities;
 using ASPCoreApp.Core.Interfaces;
 using ASPCoreApp.Web.ApiModels;
-using ASPCoreApp.Web.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASPCoreApp.Web.Api
 {
     [Route("api/[controller]")]
-    [ValidateModel]
     public class ToDoItemsController : Controller
     {
         private readonly IRepository<ToDoItem> _todoRepository;

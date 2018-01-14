@@ -9,7 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using StructureMap;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace ASPCoreApp.Web
 {
@@ -32,11 +31,6 @@ namespace ASPCoreApp.Web
 
             services.AddMvc()
                 .AddControllersAsServices();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-            });
 
             var container = new Container();
 
@@ -67,16 +61,13 @@ namespace ASPCoreApp.Web
             IHostingEnvironment env,
             ILoggerFactory loggerFactory)
         {
-            this.Configure(app, env, loggerFactory);
+            this.Configure(app, env);
             SeedData.PopulateTestData(app.ApplicationServices.GetService<AppDbContext>());
         }
 
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -86,17 +77,6 @@ namespace ASPCoreApp.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
-            app.UseStaticFiles();
-
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
 
             app.UseMvc(routes =>
             {

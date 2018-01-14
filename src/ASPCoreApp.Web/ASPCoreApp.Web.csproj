@@ -2,9 +2,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
-    <AssemblyName>CleanArchitecture.Web</AssemblyName>
+    <AssemblyName>ASPCoreApp.Web</AssemblyName>
     <OutputType>Exe</OutputType>
-    <PackageId>CleanArchitecture.Web</PackageId>
+    <PackageId>ASPCoreApp.Web</PackageId>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -12,14 +12,13 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <Content Update="wwwroot\**\*;Views\**\*;Areas\**\Views;appsettings.json;web.config">
+    <Content Update="Areas\**\Views;appsettings.json;web.config">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CleanArchitecture.Core\ASPCoreApp.Core.csproj" />
-    <ProjectReference Include="..\CleanArchitecture.Infrastructure\ASPCoreApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\ASPCoreApp.Core\ASPCoreApp.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,7 +26,6 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
