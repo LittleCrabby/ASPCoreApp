@@ -1,4 +1,5 @@
 ﻿using ASPCoreApp.Core.SharedKernel;
+using System.Collections.Generic;
 
 namespace ASPCoreApp.Core.Entities
 {
@@ -6,6 +7,8 @@ namespace ASPCoreApp.Core.Entities
     {
         public string Title { get; set; } 
         public string Body { get; set; }
-        public int AuthorId { get; private set; }
+        public int AuthorId { get; set; }
+
+        public List<Comment> Comments { get; set; }
     }
 }

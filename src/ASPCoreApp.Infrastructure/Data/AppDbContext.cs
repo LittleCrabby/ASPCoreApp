@@ -1,44 +1,34 @@
-﻿using ASPCoreApp.Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using ASPCoreApp.Core.Entities;
 using ASPCoreApp.Core.SharedKernel;
+using System;
 
 namespace ASPCoreApp.Infrastructure.Data
 {
     public class AppDbContext : DbContext
     {
-        private readonly IDomainEventDispatcher _dispatcher;
-
-        public AppDbContext(DbContextOptions<AppDbContext> options, IDomainEventDispatcher dispatcher)
-            : base(options)
-        {
-            _dispatcher = dispatcher;
-        }
-
-        public DbSet<ToDoItem> ToDoItems { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         public override int SaveChanges()
         {
-            int result = base.SaveChanges();
+            AddTimestamps();
 
-            // dispatch events only if save was successful
-            var entitiesWithEvents = ChangeTracker.Entries<BaseEntity>()
-                .Select(e => e.Entity)
-                .Where(e => e.Events.Any())
-                .ToArray();
+            return base.SaveChanges();
+        }
 
-            foreach (var entity in entitiesWithEvents)
+        private void AddTimestamps()
+        {
+            var entities = ChangeTracker.Entries().Where(x => x.Entity is BaseEntity && (x.State == EntityState.Added || x.State == EntityState.Modified));
+
+            foreach (var entity in entities)
             {
-                var events = entity.Events.ToArray();
-                entity.Events.Clear();
-                foreach (var domainEvent in events)
+                if (entity.State == EntityState.Added)
                 {
-                    _dispatcher.Dispatch(domainEvent);
+                    ((BaseEntity)entity.Entity).DateCreated = DateTime.UtcNow;
                 }
             }
-
-            return result;
         }
     }
 }

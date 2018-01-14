@@ -40,7 +40,6 @@ namespace ASPCoreApp.Web
                     _.AssemblyContainingType(typeof(BaseEntity));
                     _.Assembly("ASPCoreApp.Infrastructure");
                     _.WithDefaultConventions();
-                    _.ConnectImplementationsToTypesClosing(typeof(IHandle<>));
                 });
                 
                 config.For(typeof(IRepository<>)).Add(typeof(EfRepository<>));
@@ -53,21 +52,11 @@ namespace ASPCoreApp.Web
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller}/{action}/{id?}");
             });
 
             SeedData.PopulateTestData(app.ApplicationServices.GetService<AppDbContext>());

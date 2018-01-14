@@ -9,27 +9,27 @@ namespace ASPCoreApp.Web.Api
     [Route("api/[controller]")]
     public class PostsController : Controller
     {
-        private readonly IRepository<Post> _todoRepository;
+        private readonly IRepository<Post> _postRepository;
 
-        public PostsController(IRepository<Post> todoRepository)
+        public PostsController(IRepository<Post> postRepository)
         {
-            _todoRepository = todoRepository;
+            _postRepository = postRepository;
         }
 
-        // GET: api/Posts
+        // GET: api/PostsList
         [HttpGet]
         public IActionResult List()
         {
-            var items = _todoRepository.List()
+            var items = _postRepository.List()
                             .Select(item => PostDTO.FromPost(item));
             return Ok(items);
         }
 
-        // GET: api/ToDoItems
+        // GET: api/Post
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
-            var item = PostDTO.FromPost(_todoRepository.GetById(id));
+            var item = PostDTO.FromPost(_postRepository.GetById(id));
             return Ok(item);
         }
     }
