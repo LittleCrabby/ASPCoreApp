@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ASPCoreApp.Core\ASPCoreApp.Core.csproj" />
+    <ProjectReference Include="..\ASPCoreApp.Infrastructure\ASPCoreApp.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
