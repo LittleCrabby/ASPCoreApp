@@ -41,7 +41,7 @@ namespace ASPCoreApp.Web
                     _.WithDefaultConventions();
                 });
                 
-                config.For(typeof(IRepository<>)).Add(typeof(EfRepository<>));
+                config.For(typeof(IRepository<>)).Add(typeof(PostRepository<>));
                 
                 config.Populate(services);
             });

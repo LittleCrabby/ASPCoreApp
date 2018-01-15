@@ -1,45 +1,46 @@
 using System.Collections.Generic;
 using System.Linq;
+using ASPCoreApp.Core.Entities;
 using ASPCoreApp.Core.Interfaces;
 using ASPCoreApp.Core.SharedKernel;
 using Microsoft.EntityFrameworkCore;
 
 namespace ASPCoreApp.Infrastructure.Data
 {
-    public class EfRepository<T> : IRepository<T> where T : BaseEntity
+    public class PostRepository<T> : IRepository<Post>
     {
         private readonly AppDbContext _dbContext;
 
-        public EfRepository(AppDbContext dbContext)
+        public PostRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public T GetById(int id)
+        public Post GetById(int id)
         {
-            return _dbContext.Set<T>().SingleOrDefault(e => e.Id == id);
+            return _dbContext.Set<Post>().SingleOrDefault(e => e.Id == id);
         }
 
-        public List<T> List()
+        public List<Post> List()
         {
-            return _dbContext.Set<T>().ToList();
+            return _dbContext.Set<Post>().Include(p => p.Comments).ToList();
         }
 
-        public T Add(T entity)
+        public Post Add(Post entity)
         {
-            _dbContext.Set<T>().Add(entity);
+            _dbContext.Set<Post>().Add(entity);
             _dbContext.SaveChanges();
 
             return entity;
         }
 
-        public void Delete(T entity)
+        public void Delete(Post entity)
         {
-            _dbContext.Set<T>().Remove(entity);
+            _dbContext.Set<Post>().Remove(entity);
             _dbContext.SaveChanges();
         }
 
-        public void Update(T entity)
+        public void Update(Post entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
             _dbContext.SaveChanges();
