@@ -20,7 +20,7 @@ namespace ASPCoreApp.Web.Api
         public IActionResult List()
         {
             var items = _postRepository.List()
-                            .Select(item => PostDTO.FromPost(item));
+                            .Select(item => PostShortDTO.ShortPost(item));
             return Ok(items);
         }
         
