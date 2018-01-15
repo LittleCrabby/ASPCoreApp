@@ -27,8 +27,7 @@ namespace ASPCoreApp.Web
                 options.UseInMemoryDatabase(dbName));
                 //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddMvc()
-                .AddControllersAsServices();
+            services.AddMvc().AddControllersAsServices();
 
             var container = new Container();
 
@@ -52,12 +51,7 @@ namespace ASPCoreApp.Web
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action}/{id?}");
-            });
+            app.UseMvc();
 
             SeedData.PopulateTestData(app.ApplicationServices.GetService<AppDbContext>());
         }

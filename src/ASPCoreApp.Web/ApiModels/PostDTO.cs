@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 using ASPCoreApp.Core.Entities;
 
 namespace ASPCoreApp.Web.ApiModels
@@ -6,10 +6,10 @@ namespace ASPCoreApp.Web.ApiModels
     public class PostDTO
     {
         public int Id { get; set; }
-        [Required]
         public string Title { get; set; }
-        public string Description { get; set; }
+        public string Body { get; set; }
         public int AuthorId { get; private set; }
+        public List<Comment> Comments { get; set; }
 
         public static PostDTO FromPost(Post item)
         {
@@ -17,8 +17,9 @@ namespace ASPCoreApp.Web.ApiModels
             {
                 Id = item.Id,
                 Title = item.Title,
-                Description = item.Body,
+                Body = item.Body,
                 AuthorId = item.AuthorId,
+                Comments = item.Comments
             };
         }
     }

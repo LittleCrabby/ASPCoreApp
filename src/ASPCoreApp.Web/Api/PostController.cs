@@ -15,8 +15,7 @@ namespace ASPCoreApp.Web.Api
         {
             _postRepository = postRepository;
         }
-
-        // GET: api/PostsList
+        
         [HttpGet]
         public IActionResult List()
         {
@@ -24,8 +23,7 @@ namespace ASPCoreApp.Web.Api
                             .Select(item => PostDTO.FromPost(item));
             return Ok(items);
         }
-
-        // GET: api/Post
+        
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
