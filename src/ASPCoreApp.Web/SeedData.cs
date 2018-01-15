@@ -15,18 +15,26 @@ namespace ASPCoreApp.Web
             }
             dbContext.SaveChanges();
 
-            var Post1 = new Post()
+            Post[] newPosts =
             {
-                Title = "Post 1",
-                Body = "Sample text for post 1",
-                AuthorId = 1
-            };
-
-            var Post2 = new Post()
-            {
-                Title = "Post 2",
-                Body = "Sample text for post 2",
-                AuthorId = 2
+                new Post()
+                {
+                    Title = "Post 1",
+                    Body = "Sample text for post 1",
+                    AuthorId = 1
+                },
+                new Post()
+                {
+                    Title = "Post 2",
+                    Body = "Sample text for post 2",
+                    AuthorId = 2
+                },
+                new Post()
+                {
+                    Title = "Post 3",
+                    Body = "Sample text for post 3",
+                    AuthorId = 3
+                }
             };
 
             IList<Comment> newComments = new List<Comment>()
@@ -35,37 +43,37 @@ namespace ASPCoreApp.Web
                 {
                     Body = "Comment 1 to Post 1",
                     AuthorId = 2,
-                    Post = Post1
+                    Post = newPosts[0]
                 },
                 new Comment()
                 {
                     Body = "Comment 2 to Post 1",
                     AuthorId = 3,
-                    Post = Post1
-                },
-                new Comment()
-                {
-                    Body = "Comment 3 to Post 1",
-                    AuthorId = 4,
-                    Post = Post1
+                    Post = newPosts[0]
                 },
                 new Comment()
                 {
                     Body = "Comment 1 to Post 2",
-                    AuthorId = 1,
-                    Post = Post2
+                    AuthorId = 4,
+                    Post = newPosts[1]
                 },
                 new Comment()
                 {
                     Body = "Comment 2 to Post 2",
-                    AuthorId = 3,
-                    Post = Post2
+                    AuthorId = 1,
+                    Post = newPosts[1]
                 },
                 new Comment()
                 {
-                    Body = "Comment 3 to Post 2",
+                    Body = "Comment 1 to Post 3",
+                    AuthorId = 3,
+                    Post = newPosts[2]
+                },
+                new Comment()
+                {
+                    Body = "Comment 2 to Post 3",
                     AuthorId = 5,
-                    Post = Post2
+                    Post = newPosts[2]
                 }
             };
 

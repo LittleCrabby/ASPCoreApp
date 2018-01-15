@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ASPCoreApp.Core.Entities;
+﻿using ASPCoreApp.Core.Entities;
 
 namespace ASPCoreApp.Web.ApiModels
 {

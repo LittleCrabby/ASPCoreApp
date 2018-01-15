@@ -9,7 +9,7 @@ namespace ASPCoreApp.Web.ApiModels
         public int Id { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
-        public DateTime? DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
         public int AuthorId { get; private set; }
         public List<CommentDTO> Comments { get; set; }
 
