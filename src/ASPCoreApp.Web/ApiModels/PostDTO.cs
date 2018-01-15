@@ -11,7 +11,7 @@ namespace ASPCoreApp.Web.ApiModels
         public string Body { get; set; }
         public DateTime? DateCreated { get; set; }
         public int AuthorId { get; private set; }
-        public List<Comment> Comments { get; set; }
+        public List<CommentDTO> Comments { get; set; }
 
         public static PostDTO FromPost(Post item)
         {
@@ -22,7 +22,7 @@ namespace ASPCoreApp.Web.ApiModels
                 Body = item.Body,
                 AuthorId = item.AuthorId,
                 DateCreated = item.DateCreated,
-                Comments = item.Comments
+                Comments = CommentDTO.FromComments(item.Comments)
             };
         }
     }
