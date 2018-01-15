@@ -18,7 +18,7 @@ namespace ASPCoreApp.Infrastructure.Data
 
         public Post GetById(int id)
         {
-            return _dbContext.Set<Post>().SingleOrDefault(e => e.Id == id);
+            return _dbContext.Set<Post>().Include(p => p.Comments).SingleOrDefault(e => e.Id == id);
         }
 
         public List<Post> List()
