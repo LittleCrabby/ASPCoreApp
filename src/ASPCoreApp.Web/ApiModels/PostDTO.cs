@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ASPCoreApp.Core.Entities;
 
 namespace ASPCoreApp.Web.ApiModels
@@ -8,6 +9,7 @@ namespace ASPCoreApp.Web.ApiModels
         public int Id { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
+        public DateTime? DateCreated { get; set; }
         public int AuthorId { get; private set; }
         public List<Comment> Comments { get; set; }
 
@@ -19,6 +21,7 @@ namespace ASPCoreApp.Web.ApiModels
                 Title = item.Title,
                 Body = item.Body,
                 AuthorId = item.AuthorId,
+                DateCreated = item.DateCreated,
                 Comments = item.Comments
             };
         }
