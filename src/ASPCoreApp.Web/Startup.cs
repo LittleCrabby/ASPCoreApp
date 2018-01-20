@@ -4,8 +4,6 @@ using ASPCoreApp.Core.SharedKernel;
 using ASPCoreApp.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,11 +27,8 @@ namespace ASPCoreApp.Web
                 options.UseInMemoryDatabase(dbName));
                 //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddCors();
             services.AddMvc().AddControllersAsServices();
-            services.Configure<MvcOptions>(options =>
-            {
-                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
-            });
 
             var container = new Container();
 
@@ -58,6 +53,7 @@ namespace ASPCoreApp.Web
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             SeedData.PopulateTestData(app.ApplicationServices.GetService<AppDbContext>());
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseMvc(routes =>
             {
